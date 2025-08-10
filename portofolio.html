@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Editing Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .thumbnail {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.03);
+    }
+
+    .thumbnail img {
+      width: 100%;
+      display: block;
+    }
+
+    .thumbnail p {
+      text-align: center;
+      padding: 10px;
+      margin: 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      background: transparent;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">My YouTube Video Editing Portfolio</h1>
+
+  <div class="gallery">
+    <div class="thumbnail" data-video-id="3Z1zzTdW5GQ">
+      <img src="https://img.youtube.com/vi/3Z1zzTdW5GQ/hqdefault.jpg" alt="Video 1">
+      <p>Project 1</p>
+    </div>
+    <div class="thumbnail" data-video-id="EDI2X-bguTM">
+      <img src="https://img.youtube.com/vi/EDI2X-bguTM/hqdefault.jpg" alt="Video 2">
+      <p>Project 2</p>
+    </div>
+    <div class="thumbnail" data-video-id="FB-QqWCnauA">
+      <img src="https://img.youtube.com/vi/FB-QqWCnauA/hqdefault.jpg" alt="Video 3">
+      <p>Project 3</p>
+    </div>
+    <div class="thumbnail" data-video-id="XAZi5SQXCKk">
+      <img src="https://img.youtube.com/vi/XAZi5SQXCKk/hqdefault.jpg" alt="Video 4">
+      <p>Project 4</p>
+    </div>
+    <div class="thumbnail" data-video-id="ZokOMBvUnzw">
+      <img src="https://img.youtube.com/vi/ZokOMBvUnzw/hqdefault.jpg" alt="Video 5">
+      <p>Project 5</p>
+    </div>
+    <div class="thumbnail" data-video-id="3KjhI9lD770">
+      <img src="https://img.youtube.com/vi/3KjhI9lD770/hqdefault.jpg" alt="Video 6">
+      <p>Project 6</p>
+    </div>
+    <div class="thumbnail" data-video-id="fySEu6rbRfU">
+      <img src="https://img.youtube.com/vi/fySEu6rbRfU/hqdefault.jpg" alt="Video 7">
+      <p>Project 7</p>
+    </div>
+    <div class="thumbnail" data-video-id="vg0vMV1tX7k">
+      <img src="https://img.youtube.com/vi/vg0vMV1tX7k/hqdefault.jpg" alt="Video 8">
+      <p>Project 8</p>
+    </div>
+    <div class="thumbnail" data-video-id="picuaQTcqUs">
+      <img src="https://img.youtube.com/vi/picuaQTcqUs/hqdefault.jpg" alt="Video 9">
+      <p>Project 9</p>
+    </div>
+    <div class="thumbnail" data-video-id="wwgyL7lDDp8">
+      <img src="https://img.youtube.com/vi/wwgyL7lDDp8/hqdefault.jpg" alt="Video 10">
+      <p>Project 10</p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="video-container">
+        <iframe id="youtubePlayer" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('youtubePlayer');
+    const closeBtn = document.querySelector('.close');
+
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const videoId = thumb.getAttribute('data-video-id');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modal.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      iframe.src = '';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        iframe.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
